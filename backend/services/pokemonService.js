@@ -5,17 +5,27 @@
 
 // A function that fetches a pokemon by name from the PokeAPI.
 export const fetchPokemon = async (name) => {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
-    const data = await response.json()
+    try {
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
 
-    return {
-        name: data.name,
-        image: data.sprites.front_default,
-        types: data.types.map(t => t.type.name),
-        stats: data.stats.map(s => ({
-            name: s.stat.name,
-            value: s.base_stat
-        }))
+        if (!response.ok)   {
+            throw new Error(`Failed to fetch pokemon with name: ${name}`);
+        }
+
+        const data = await response.json()
+
+        return {
+            name: data.name,
+            image: data.sprites.front_default//,
+            // types: data.types.map(t => t.type.name),
+            // stats: data.stats.map(s => ({
+            //     name: s.stat.name,
+            //     value: s.base_stat
+            // }))
+        }
+    } catch (error) {
+        console.error(`Error fetching Pokemon ${name}:`, error)
+        throw error
     }
 }
 
