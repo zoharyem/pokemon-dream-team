@@ -32,13 +32,16 @@ export const fetchPokemon = async (name) => {
 // A function that fetches a list of the user's pokemon options from the PokeAPI.
 // Only name and image are stored for efficency.
 export const fetchPokemonOptions = async () => {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=250')
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
+    if (!response.ok)   {
+        throw new Error(`Pokemon Service failed to fetch pokemon options`);
+    }
     const data = await response.json()
 
     return {
         data: data.results.map(p => ({
             name: p.name,
-            image: data.sprites.front_default
+            image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${p.url.split('/').slice(-2, -1)[0]}.png`
         }))
     }
 }

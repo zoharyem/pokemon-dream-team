@@ -13,12 +13,12 @@ function PokemonTile({ pokemon }) {
     );
 }
 
-function PokemonMiniTile({ pokemon }) {
+function PokemonOptionTile({ pokemon, onSelect }) {
     return (
-        <div className="pokemon-mini-tile">
+        <div className="pokemon-option-tile" onClick={() => onSelect(pokemon)}>
             <h4>Pokemon Name: {pokemon.name}</h4>
         </div>
     );
 }
 
-export default { PokemonMiniTile, PokemonTile };
+export default { PokemonMiniTile: PokemonOptionTile, PokemonTile };

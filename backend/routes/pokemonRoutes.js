@@ -6,9 +6,11 @@
 */
 
 import express from 'express'
-import { getPokemon } from '../controllers/pokemonController.js'
+import { getPokemon, getPokemonOptions } from '../controllers/pokemonController.js'
 
 const router = express.Router()
+
+router.get('/options', getPokemonOptions)
 
 router.get('/:name', getPokemon)
 

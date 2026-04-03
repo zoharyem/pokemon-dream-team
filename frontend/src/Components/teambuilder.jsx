@@ -2,6 +2,7 @@ import { useState } from "react";
 import Team from "./team";
 import { fetchPokemon } from "../api/api";
 import { useEffect } from 'react';
+import Selector from "./selector";
 
 function TeamBuilder() {
 
@@ -13,7 +14,7 @@ function TeamBuilder() {
           addPokemon(pika);
       }
       fetchPikachu();
-  }, []); // This is a hack to run the useEffect only once, will be removed later
+  }, []);
 
 
   function addPokemon(pokemon) {
@@ -33,6 +34,9 @@ function TeamBuilder() {
     <div className="teambuilder">
       <h2>Team builder</h2>
       <Team team={team} onAdd={addPokemon} onRemove={removePokemon} />
+      <h2>Pokemon Selector</h2>
+      Select your pokemon here!
+      <Selector onSelect={addPokemon} />
     </div>
   );
 }

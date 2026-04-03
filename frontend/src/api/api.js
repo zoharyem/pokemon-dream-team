@@ -8,3 +8,14 @@ export const fetchPokemon = async (name) => {
 
     return data
 }
+
+export const fetchPokemonOptions = async () => {
+    const response = await fetch(`/api/pokemon/options`);
+
+    if (!response.ok)   {
+        throw new Error(`Failed to fetch pokemon options`);
+    }
+
+    const data = await response.json();
+    return data
+}
