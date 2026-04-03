@@ -1,4 +1,4 @@
-function PokemonTile({ pokemon }) {
+export function PokemonTile({ pokemon }) {
     if (!pokemon) {
         return (
             <div className="pokemon-tile empty-tile">
@@ -13,12 +13,10 @@ function PokemonTile({ pokemon }) {
     );
 }
 
-function PokemonOptionTile({ pokemon, onSelect }) {
+export function PokemonOptionTile({ pokemon, onSelect }) {
     return (
         <div className="pokemon-option-tile" onClick={() => onSelect(pokemon)}>
             <h4>Pokemon Name: {pokemon.name}</h4>
         </div>
     );
 }
-
-export default { PokemonMiniTile: PokemonOptionTile, PokemonTile };

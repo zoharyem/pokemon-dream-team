@@ -3,7 +3,7 @@ The component used to display and select from different pokemon options for your
 */
 import { useEffect, useState } from "react";
 import { fetchPokemonOptions } from "../api/api";
-import pokemonMinTile from "./pokemontiles";
+import { PokemonOptionTile } from "./pokemontiles";
 
 export default function Selector({ onSelect }) {
     // call options data
@@ -19,17 +19,16 @@ export default function Selector({ onSelect }) {
 
     return (
         <div className="selector"> 
-            This is your pokemon selector!
-
+            <div>This is your pokemon selector!</div>
             <div className="selector-grid">
                 {pokemonOptions.map((option) => (
-                    <pokemonMinTile
+                    <PokemonOptionTile
+                    key={option.name}
                     pokemon={option}
                     onselect={() => onSelect(option)}>
-                    </pokemonMinTile>
+                    </PokemonOptionTile>
                 ))}
             </div>
         </div>
     )
-    // on click of a tile, add to team and remove from options
 }
