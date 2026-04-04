@@ -133,23 +133,66 @@ code {
 
 .selector-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 12px;
   width: 100%;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 80vw;
 }
 
 .pokemon-option-tile {
-  width: 180px;
-  height: 180px;
+  width: 100px;
+  height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   border-radius: 12px;
-  padding: 20px;
+  padding: 10px;
   box-shadow: var(--shadow);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
   color: white;
+}
+
+.react-tooltip {
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: #333 !important;
+  border: 1px solid rgba(102, 126, 234, 0.25) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  padding: 6px 10px !important;
+  font-size: 0.78rem !important;
+  line-height: 1.3 !important;
+  border-radius: 10px !important;
+  opacity: 1 !important;
+  max-width: 180px !important;
+}
+
+.react-tooltip-arrow {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.react-tooltip-content {
+  white-space: nowrap;
+}
+
+
+.pokemon-option-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.pokemon-tile img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
