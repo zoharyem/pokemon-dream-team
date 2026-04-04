@@ -32,6 +32,7 @@ function TeamBuilder() {
   function removePokemonFromTeam(pokemon) {
     console.log(`Removing ${pokemon.name} from the team...`); //todo: remove this log
     setTeam(team.filter((p) => p.name !== pokemon.name));
+    setPokemonOptions([...pokemonOptions, pokemon]);
     console.log(`Removed ${pokemon.name} from the team.`); //todo: remove this log
   }
 
