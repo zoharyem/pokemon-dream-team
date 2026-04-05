@@ -3,22 +3,20 @@ import { useRef, useState } from 'react';
 
 export function PokemonTile({ pokemon, onClick }) {
     const [clickCount, setClickCount] = useState(0);
-    const [stateChanged, setStateChanged] = useState(false);
 
     const MAX_CLICKS = 3;
 
-    const handleClick = () => {
+    const handleClickEmpty = () => {
         if (clickCount < MAX_CLICKS) {
         setClickCount(clickCount + 1);
         } else {
-            setStateChanged(true);
             setClickCount(0);
+            onClick(null); // This will trigger the logic to add a random Pokémon since the slot is empty
         }
     }
-
-    if (!pokemon) {
+    if (!pokemon) { // if the slot is empty
         return (
-            <div className='pokemon-tile' onClick = {handleClick}>
+            <div className='pokemon-tile' onClick = {handleClickEmpty}>
                 <div className={`pokemon-tile-image ${clickCount > 0 ? `shake${clickCount}` : ''}`}>
                     <img src="/poke-ball.png" alt="Empty slot" />
                 </div>
@@ -30,7 +28,7 @@ export function PokemonTile({ pokemon, onClick }) {
             <div className='pokemon-tile-image'>
                 <img src={pokemon.image} alt={pokemon.name} />
             </div>
-            <h3>Pokemon {pokemon.name}</h3>
+            <h3>{pokemon.name}</h3>
         </div>
     );
 }

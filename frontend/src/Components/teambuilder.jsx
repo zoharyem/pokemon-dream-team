@@ -3,7 +3,6 @@ import Team from "./team";
 import { fetchPokemonOptions } from "../api/api";
 import { useEffect } from 'react';
 import Selector from "./selector";
-
 function TeamBuilder() {
 
   const [team, setTeam] = useState([]); // todo initialise as null
@@ -20,7 +19,18 @@ function TeamBuilder() {
   }, []); // only once when the component is first rendered.
 
 
-  function addPokemonToTeam(pokemon) {
+  function addRandomOrRemovePokemon(pokemon = null) {
+    if (team.length >= 6) {
+      alert("Your team is full! Remove a Pokémon before adding another.");
+      return;
+    } else if (pokemon) {
+      removePokemonByName(pokemon);
+    } else {
+      addRandomPokemon();
+    }
+  }
+
+  function addPokemonByName(pokemon) {
     if (team.length >= 6) {
       alert("Your team is full! Remove a Pokémon before adding another.");
       return;
@@ -29,20 +39,32 @@ function TeamBuilder() {
     setPokemonOptions(pokemonOptions.filter((option) => option.name !== pokemon.name));
     }
 
-  function removePokemonFromTeam(pokemon) {
-    console.log(`Removing ${pokemon.name} from the team...`); //todo: remove this log
+  function removePokemonByName(pokemon) {
     setTeam(team.filter((p) => p.name !== pokemon.name));
     setPokemonOptions([...pokemonOptions, pokemon]);
-    console.log(`Removed ${pokemon.name} from the team.`); //todo: remove this log
   }
+
+  function addRandomPokemon() {
+      if (team.length >= 6) {
+        alert("Your team is full! Remove a Pokémon before adding another.");
+        return;
+      } else if (pokemonOptions.length === 0) {
+        alert("No more Pokémon options available! Remove a Pokémon from your team to add more.");
+        return;
+      } else {
+        const randomIndex = Math.floor(Math.random() * pokemonOptions.length);
+        const randomPokemon = pokemonOptions[randomIndex];
+        addPokemonByName(randomPokemon);
+      }
+     }
 
   return (
     <div className="teambuilder">
       <h2>Team builder</h2>
-      <Team team={team} onClick={removePokemonFromTeam} />
+      <Team team={team} onClick={addRandomOrRemovePokemon} /> {/* When clicking a Pokémon tile in the team, remove a Pokémon; otherwise, add a random one */}
       <h2>Pokemon Selector</h2>
       Select your pokemon here!
-      <Selector onClick={addPokemonToTeam} pokemonOptions={pokemonOptions} />
+      <Selector onClick={addPokemonByName} pokemonOptions={pokemonOptions} />
     </div>
   );
 }
